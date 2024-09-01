@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import ClientLayout from "../../components/layouts/clientLayout";
 import LibraryCarousel from "../../components/libraryCarousel";
 
-const Homepage = () => {
+const HomePage = () => {
   const { books } = useSelector((state) => state.book);
 
   return (
@@ -32,4 +32,4 @@ const Homepage = () => {
   );
 };
 
-export default Homepage;
+export default HomePage;

@@ -8,7 +8,7 @@ import { useEffect } from "react";
 import AdminLayout from "./components/layouts/adminLayout";
 import AdminPrivateRoutes from "./components/privateRoutes/adminPrivateRoute";
 import BookPage from "./pages/book/bookPage";
-import Homepage from "./pages/client/homepage";
+import HomePage from "./pages/client/homepage";
 import BookDetailPage from "./pages/client/bookDetailPage";
 import ClientPrivateRouter from "./components/privateRoutes/clientPrivateRoute";
 import BurrowsPage from "./pages/client/burrowsPage";
@@ -28,7 +28,7 @@ function App() {
         {/* Auth Routes - Public Routes  */}
 
         <Route path="/auth" element={<AuthPage />} />
-        <Route path="/" element={<h1>I am student Homepage</h1>} />
+        <Route path="/homepage" element={<h1>I am student Homepage</h1>} />
 
         {/* Admin Route */}
         <Route
@@ -47,7 +47,7 @@ function App() {
         </Route>
 
         {/* client routes-public routes */}
-        <Route path="/" element={<Homepage />} />
+        <Route path="/home" element={<HomePage />} />
         <Route path="/book/:_id" element={<BookDetailPage />} />
         {/* Client Routes - Private */}
         <Route
