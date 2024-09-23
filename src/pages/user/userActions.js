@@ -1,12 +1,12 @@
 import { toast } from "react-toastify";
-import { setUser, setUsers } from "./userSlice";
+import { setUser, setUsers } from "./userSlice.js";
 import {
   createUserByAdmin,
   getAccessToken,
   getUser,
   getUsers,
   logoutUser,
-} from "../../axios/userAxiosHelper";
+} from "../../axios/userAxiosHelper.js";
 
 export const getUserAction = () => async (dispatch) => {
   // call axios to get the user

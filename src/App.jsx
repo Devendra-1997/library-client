@@ -28,7 +28,7 @@ function App() {
         {/* Auth Routes - Public Routes  */}
 
         <Route path="/auth" element={<AuthPage />} />
-        <Route path="/homepage" element={<h1>I am student Homepage</h1>} />
+        <Route path="/homepage" element={<HomePage />} />
 
         {/* Admin Route */}
         <Route
@@ -47,7 +47,7 @@ function App() {
         </Route>
 
         {/* client routes-public routes */}
-        <Route path="/home" element={<HomePage />} />
+        <Route path="/" element={<HomePage />} />
         <Route path="/book/:_id" element={<BookDetailPage />} />
         {/* Client Routes - Private */}
         <Route
