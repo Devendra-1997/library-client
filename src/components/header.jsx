@@ -55,7 +55,14 @@ const Header = () => {
                       Burrow History
                     </Link>
                   </Dropdown.Item>
-                  <Dropdown.Item className="fw-bold">Profile</Dropdown.Item>
+                  <Dropdown.Item className="fw-bold">
+                    <Link
+                      to="/profile"
+                      className="text-decoration-none text-dark"
+                    >
+                      Profile
+                    </Link>
+                  </Dropdown.Item>
                   <Dropdown.Item>
                     <Button
                       variant="outline-danger"

@@ -85,3 +85,17 @@ export const createUserAction = (userObj) => async (dispatch) => {
   dispatch(getUsersAction());
   toast.success("User Created!");
 };
+
+import { updateUserProfile } from "../../axios/userAxiosHelper";
+
+// Update user profile
+export const updateUserProfileAction = (userObj) => async (dispatch) => {
+  const result = await updateUserProfile(userObj);
+
+  if (result?.status === "error") {
+    return toast.error(result.message);
+  }
+
+  dispatch(setUser(result.data)); // Update the user slice with new user data
+  toast.success("Profile updated successfully!");
+};

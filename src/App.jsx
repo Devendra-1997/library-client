@@ -15,6 +15,8 @@ import BurrowsPage from "./pages/client/burrowsPage";
 import ReviewsPage from "./pages/admin/reviewsPage";
 import UsersPage from "./pages/admin/usersPage";
 import { getBooksAction } from "./pages/book/bookActions";
+import DashboardPage from "./pages/admin/dashboardPage";
+import ProfilePage from "./pages/user/profilePage";
 
 function App() {
   const dispatch = useDispatch();
@@ -39,9 +41,9 @@ function App() {
             </AdminPrivateRoutes>
           }
         >
-          <Route path="dashboard" element={<h1>DASHBOARD</h1>} />
+          <Route path="dashboard" element={<DashboardPage />} />
           <Route path="books" element={<BookPage />} />
-          <Route path="burrows" element={<h1>BURROWS</h1>} />
+          <Route path="burrows" element={<BurrowsPage />} />
           <Route path="reviews" element={<ReviewsPage />} />
           <Route path="users" element={<UsersPage />} />
         </Route>
@@ -50,6 +52,9 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/book/:_id" element={<BookDetailPage />} />
         {/* Client Routes - Private */}
+
+        <Route path="/profile" element={<ProfilePage />} />
+
         <Route
           path="/burrows"
           element={

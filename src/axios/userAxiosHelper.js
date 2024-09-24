@@ -97,3 +97,15 @@ export const createUserByAdmin = (userObj) => {
 
   return response;
 };
+
+// Update user profile
+export const updateUserProfile = (userObj) => {
+  const response = axios
+    .put(`${USER_API_URL}/profile`, userObj, axiosConfig())
+    .then((res) => res.data)
+    .catch((error) => {
+      throw error;
+    });
+
+  return response;
+};
