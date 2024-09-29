@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Form, Button, Container } from "react-bootstrap";
-import { updateUserProfileAction } from "./userActions";
+import { getUserProfileAction, updateUserProfileAction } from "./userActions";
+import { useNavigate } from "react-router-dom";
 
 const ProfilePage = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.user);
   const { first_name, last_name, email } = user;
@@ -13,6 +15,20 @@ const ProfilePage = () => {
     last_name: last_name || "",
     email: email || "",
   });
+  useEffect(() => {
+    dispatch(getUserProfileAction); // Fetch user profile on component mount
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (user) {
+      setProfileData({
+        first_name: user.first_name || "",
+        last_name: user.last_name || "",
+        email: user.email || "",
+        phone: user.phone || "",
+      });
+    }
+  }, [user]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -21,7 +37,7 @@ const ProfilePage = () => {
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    dispatch(updateUserProfileAction(profileData)); // Dispatch action to update profile
+    dispatch(updateUserProfileAction(profileData, navigate)); // Dispatch action to update profile
   };
 
   return (
@@ -36,6 +52,7 @@ const ProfilePage = () => {
             value={profileData.first_name}
             onChange={handleChange}
             placeholder="Enter first name"
+            required
           />
         </Form.Group>
         <Form.Group controlId="lastName" className="mt-3">
@@ -46,6 +63,7 @@ const ProfilePage = () => {
             value={profileData.last_name}
             onChange={handleChange}
             placeholder="Enter last name"
+            required
           />
         </Form.Group>
         <Form.Group controlId="email" className="mt-3">

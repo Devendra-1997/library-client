@@ -89,13 +89,27 @@ export const createUserAction = (userObj) => async (dispatch) => {
 import { updateUserProfile } from "../../axios/userAxiosHelper";
 
 // Update user profile
-export const updateUserProfileAction = (userObj) => async (dispatch) => {
-  const result = await updateUserProfile(userObj);
+export const updateUserProfileAction =
+  (userObj, navigate) => async (dispatch) => {
+    const result = await updateUserProfile(userObj);
+
+    if (result?.status === "error") {
+      return toast.error(result.message);
+    }
+
+    dispatch(setUser(result.data)); // Update the user slice with new user data
+    toast.success("Profile updated successfully!");
+    navigate(-1);
+  };
+
+// Get user profile
+export const getUserProfileAction = () => async (dispatch) => {
+  const result = await getUser();
 
   if (result?.status === "error") {
     return toast.error(result.message);
   }
 
-  dispatch(setUser(result.data)); // Update the user slice with new user data
-  toast.success("Profile updated successfully!");
+  dispatch(setUser(result.data)); // Update the user slice with the fetched user data
+  toast.success("User profile fetched successfully!");
 };

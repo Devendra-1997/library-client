@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React from "react";
+
 import { Modal, Button, Form } from "react-bootstrap";
 
 const CreateOrEditStatsModal = ({ showModal, setShowModal, modalPayload }) => {
