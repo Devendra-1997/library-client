@@ -3,9 +3,19 @@ import BookCard from "../../components/bookCard";
 import { useSelector } from "react-redux";
 import ClientLayout from "../../components/layouts/clientLayout";
 import LibraryCarousel from "../../components/libraryCarousel";
+import { useState } from "react";
 
 const HomePage = () => {
   const { books } = useSelector((state) => state.book);
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const handleSearch = (e) => {
+    setSearchTerm(e.target.value.toLowerCase());
+  };
+
+  const filteredBooks = books.filter((book) =>
+    book.title.toLowerCase().includes(searchTerm)
+  );
 
   return (
     <ClientLayout>
@@ -15,13 +25,16 @@ const HomePage = () => {
 
       <Container>
         <div className="p-4">
-          {/* ToDo by students */}
-          <Form.Control type="text" placeholder="Search Book By Name" /> Number
-          of Books
+          <Form.Control
+            type="text"
+            placeholder="Search Book By Name"
+            onChange={handleSearch}
+          />
+          <p>Number of Books Found: {filteredBooks.length}</p>
         </div>
 
         <Row>
-          {books.map((book) => (
+          {filteredBooks.map((book) => (
             <Col xs={3} key={book._id} className="my-2">
               <BookCard book={book} />
             </Col>

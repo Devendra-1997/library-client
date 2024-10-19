@@ -1,7 +1,7 @@
 import { toast } from "react-toastify";
 import { setReviews } from "./reviewSlice";
 import { getBurrowsAction } from "../burrow/burrowActions";
-import { createReview, getReviews, updateReview } from "./reviewAxiosHelper";
+import { createReview, updateReview, getReviews } from "./reviewAxiosHelper";
 
 // get user burrows
 export const getReviewsAction = () => async (dispatch) => {
@@ -11,7 +11,6 @@ export const getReviewsAction = () => async (dispatch) => {
     dispatch(setReviews(result.data));
   }
 };
-
 // create a review
 export const createReviewAction = (reviewObj) => async (dispatch) => {
   const result = await createReview(reviewObj);
@@ -23,15 +22,14 @@ export const createReviewAction = (reviewObj) => async (dispatch) => {
   // once a revew is submitted, we refetch burrows
   dispatch(getBurrowsAction());
 };
-
-// create a review
-export const updateReviewAction = (reviewObj) => async (dispatch) => {
+// update a review
+export const updateReviewAction = (reviewObj, book_id) => async (dispatch) => {
   const result = await updateReview(reviewObj);
 
   if (result?.status === "error") {
     return toast.error(result.message);
   }
 
-  // once a revew is updated, we get all reviews
-  dispatch(getReviewsAction());
+  toast.success("Review updated successfully.");
+  dispatch(getReviewsAction(book_id));
 };

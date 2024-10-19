@@ -17,12 +17,14 @@ import { format } from "date-fns";
 import BurrowBookModal from "../../components/modal/burrowBookModal";
 import BookDetailsTab from "../../components/bookDetailsTab";
 import { getBookAction } from "../book/bookActions";
+import { getReviewsAction } from "../../entity/review/reviewActions";
 
 const BookDetailPage = () => {
   //grab _id from url params
   const { _id } = useParams();
   const { book } = useSelector((state) => state.book);
   const { user } = useSelector((state) => state.user);
+  const { reviews } = useSelector((state) => state.review);
 
   const isAuthenticated = !!user?._id;
 
@@ -33,8 +35,11 @@ const BookDetailPage = () => {
     if (_id) {
       // call action to get a book
       dispatch(getBookAction(_id));
+      dispatch(getReviewsAction(_id));
     }
   }, [_id, dispatch]);
+  // Filter reviews for the current book
+  const filteredReviews = reviews.filter((review) => review.book_id === _id);
 
   // open burrow book modal
   const { show, handleClose, handleShow } = useModal();
@@ -92,7 +97,10 @@ const BookDetailPage = () => {
         </Row>
 
         <Row className="mt-4">
-          <BookDetailsTab description={book.description} />
+          <BookDetailsTab
+            description={book.description}
+            reviews={filteredReviews}
+          />
         </Row>
       </Container>
 
